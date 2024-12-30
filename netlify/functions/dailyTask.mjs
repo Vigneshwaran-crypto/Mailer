@@ -45,20 +45,10 @@ https://docs.google.com/spreadsheets/d/1U-MnTJjA8vzB4haTjmKfKZS4c6IT5m8nWwChqizi
       JSON.stringify({ message: "Mail Sent Successfully", info }),
       { statusCode: 200 }
     );
-
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ message: "Mail Sent Successfully", info }),
-    };
   } catch (e) {
     return new Response(
       JSON.stringify({ error: "Mail Failed", message: e.message }),
       { statusCode: 500 }
     );
-
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: "Mail Failed", message: e.message }),
-    };
   }
 };
