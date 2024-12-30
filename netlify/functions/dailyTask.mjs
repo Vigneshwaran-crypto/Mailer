@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer";
 import moment from "moment";
 
-export const handler = async (event, context) => {
+export default async (event, context) => {
   console.log("Your scheduled task is running!");
 
   const transporter = nodemailer.createTransport({
@@ -49,5 +49,3 @@ https://docs.google.com/spreadsheets/d/1U-MnTJjA8vzB4haTjmKfKZS4c6IT5m8nWwChqizi
     body: "Task completed successfully!",
   };
 };
-
-handler();
