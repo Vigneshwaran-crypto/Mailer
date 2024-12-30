@@ -1,0 +1,6 @@
+[functions]
+directory = "netlify/functions"
+
+[[functions.schedule]]
+path = "dailyTask"
+schedule = "cron(* * * * ? *)"  # Every minute
