@@ -54,5 +54,5 @@ https://docs.google.com/spreadsheets/d/1U-MnTJjA8vzB4haTjmKfKZS4c6IT5m8nWwChqizi
 };
 
 export const config = {
-  schedule: "@hourly",
+  schedule: "30 13 * * 1-5",
 };
