@@ -1,7 +1,3 @@
-[functions]
-directory = "netlify/functions"
-
-[[functions.schedule]]
-path = "dailyTask"
-schedule = "* * * * *"
+[functions."dailyTask"]
+schedule = "@hourly"
 
