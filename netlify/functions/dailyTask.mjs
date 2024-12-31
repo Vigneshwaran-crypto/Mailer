@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 import moment from "moment";
 
 export default async (event, context) => {
-  console.log("Your scheduled task is running!");
+  console.log("Mail Process Initialized....");
   try {
     const transporter = nodemailer.createTransport({
       // service: "gmail",
@@ -40,7 +40,7 @@ https://docs.google.com/spreadsheets/d/1U-MnTJjA8vzB4haTjmKfKZS4c6IT5m8nWwChqizi
     };
 
     const info = await transporter.sendMail(mailOptions);
-
+    console.log("Mail Delivered Details:", info);
     return new Response(
       JSON.stringify({ message: "Mail Sent Successfully", info }),
       { statusCode: 200 }
