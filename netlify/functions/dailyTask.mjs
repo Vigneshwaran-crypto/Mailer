@@ -5,9 +5,10 @@ export default async (event, context) => {
   console.log("Mail Process Initialized....");
   try {
     const today = moment().format("DD/MM/YYYY");
-    const bossOnLeave = process.env.BOSS_ON_LEAVE === "true";
+    const bossOnLeave = process.env.BOSS_ON_LEAVE === "1";
 
     if (bossOnLeave) {
+      console.log(`Mail Skipped today : ${today} - Office Leave`);
       return new Response(
         JSON.stringify({ message: `${today} is your leave , Mail Skipped` }),
         { statusCode: 200 }
@@ -26,8 +27,8 @@ export default async (event, context) => {
 
     const mailOptions = {
       from: "vigneswaran@betamonks.com",
-      to: "23msccs06@thiruthangalnadarcollege.edu.in",
-      cc: "vickytata619@gmail.com",
+      to: "Ravi.Padmanaban@v-p-s.com",
+      cc: "palani@betamonks.com",
       subject: `TimeSheet - Vigneshwaran - ${today}`,
       text: `
 Hi   sir,
@@ -51,6 +52,7 @@ https://docs.google.com/spreadsheets/d/1U-MnTJjA8vzB4haTjmKfKZS4c6IT5m8nWwChqizi
       { statusCode: 200 }
     );
   } catch (e) {
+    console.log("Error Ocurred :", e.message);
     return new Response(
       JSON.stringify({ error: "Mail Failed", message: e.message }),
       { statusCode: 500 }
