@@ -4,22 +4,26 @@ import moment from "moment";
 export default async (event, context) => {
   console.log("Mail Process Initialized....");
   try {
+    const today = moment().format("DD/MM/YYYY");
+    const bossOnLeave = process.env.BOSS_ON_LEAVE === "true";
+
+    if (bossOnLeave) {
+      return new Response(
+        JSON.stringify({ message: `${today} is your leave , Mail Skipped` }),
+        { statusCode: 200 }
+      );
+    }
+
     const transporter = nodemailer.createTransport({
-      // service: "gmail",
-      // auth: {
-      //   user: "Vickytata619@gmail.com",
-      //   pass: "blcn wmnt xtxz smcg",
-      // },
       host: "betamonks.com",
-      port: 465, // Usually 587 for TLS or 465 for SSL
-      secure: true, // true for 465, false for other ports
+      port: 465,
+      secure: true,
       auth: {
         user: "vigneswaran@betamonks.com",
         pass: "Pass123!@#",
       },
     });
 
-    const today = moment().format("DD/MM/YYYY");
     const mailOptions = {
       from: "vigneswaran@betamonks.com",
       to: "23msccs06@thiruthangalnadarcollege.edu.in",
@@ -35,6 +39,7 @@ Thanks and regards,
 Vigneshwaran. S
 
 Please follow the link :
+
 https://docs.google.com/spreadsheets/d/1U-MnTJjA8vzB4haTjmKfKZS4c6IT5m8nWwChqiziF4o/edit?usp=drivesdk
     `,
     };
