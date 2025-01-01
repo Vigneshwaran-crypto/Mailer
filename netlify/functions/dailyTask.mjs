@@ -7,6 +7,10 @@ export default async (event, context) => {
     const today = moment().format("DD/MM/YYYY");
     const bossOnLeave = process.env.BOSS_ON_LEAVE === "1";
 
+    console.log("isBossOnLeave :", bossOnLeave);
+    console.log("Environment Var :", process.env.BOSS_ON_LEAVE);
+    console.log("Environment Var Type :", typeof process.env.BOSS_ON_LEAVE);
+
     if (bossOnLeave) {
       console.log(`Mail Skipped today : ${today} - Office Leave`);
       return new Response(
