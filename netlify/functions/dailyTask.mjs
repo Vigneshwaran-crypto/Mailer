@@ -8,7 +8,6 @@ export default async (event, context) => {
     const bossOnLeave =
       process.env.NETLIFY_PLUGIN_USE_ENV_IN_RUNTIME_DEF === "1";
 
-    console.log("isBossOnLeave :", bossOnLeave);
     console.log(
       "Environment Var :",
       process.env.NETLIFY_PLUGIN_USE_ENV_IN_RUNTIME_DEF
