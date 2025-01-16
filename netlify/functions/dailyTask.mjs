@@ -5,17 +5,7 @@ export default async (event, context) => {
   console.log("Mail Process Initialized....");
   try {
     const today = moment().format("DD/MM/YYYY");
-    const bossOnLeave =
-      process.env.NETLIFY_PLUGIN_USE_ENV_IN_RUNTIME_DEF === "1";
-
-    console.log(
-      "Environment Var :",
-      process.env.NETLIFY_PLUGIN_USE_ENV_IN_RUNTIME_DEF
-    );
-    console.log(
-      "Environment Var Type :",
-      typeof process.env.NETLIFY_PLUGIN_USE_ENV_IN_RUNTIME_DEF
-    );
+    const bossOnLeave = false;
 
     if (bossOnLeave) {
       console.log(`Mail Skipped today : ${today} - Office Leave`);
