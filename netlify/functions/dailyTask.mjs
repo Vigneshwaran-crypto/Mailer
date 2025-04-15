@@ -5,7 +5,7 @@ export default async (event, context) => {
   console.log("Mail Process Initialized....");
   try {
     const today = moment().format("DD/MM/YYYY");
-    const bossOnLeave = true;
+    const bossOnLeave = false;
 
     if (bossOnLeave) {
       console.log(`Mail Skipped today : ${today} - Office Leave`);
@@ -41,8 +41,7 @@ Vigneshwaran. S
 
 Please follow the link :
 
-https://docs.google.com/spreadsheets/d/1U-MnTJjA8vzB4haTjmKfKZS4c6IT5m8nWwChqiziF4o/edit?usp=drivesdk
-    `,
+https://docs.google.com/spreadsheets/d/1U-MnTJjA8vzB4haTjmKfKZS4c6IT5m8nWwChqiziF4o/edit?usp=sharing`,
     };
 
     const info = await transporter.sendMail(mailOptions);
