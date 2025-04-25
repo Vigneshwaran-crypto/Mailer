@@ -5,7 +5,7 @@ export default async (event, context) => {
   console.log("Mail Process Initialized....");
   try {
     const today = moment().format("DD/MM/YYYY");
-    const bossOnLeave = true;
+    const bossOnLeave = false;
 
     if (bossOnLeave) {
       console.log(`Mail Skipped today : ${today} - Office Leave`);
