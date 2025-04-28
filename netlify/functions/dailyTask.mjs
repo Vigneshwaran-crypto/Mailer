@@ -7,7 +7,9 @@ export default async (event, context) => {
     const today = moment().format("DD/MM/YYYY");
     const bossOnLeave = false;
 
-    if (bossOnLeave) {
+    const leaveDays = ["30/05/2025", "01/05/2025", "20/10/2025"];
+
+    if (bossOnLeave || leaveDays.includes(today)) {
       console.log(`Mail Skipped today : ${today} - Office Leave`);
       return new Response(
         JSON.stringify({ message: `${today} is your leave , Mail Skipped` }),
@@ -27,8 +29,8 @@ export default async (event, context) => {
 
     const mailOptions = {
       from: "vigneswaran@betamonks.com",
-      to: "Ravi.Padmanaban@v-p-s.com",
-      cc: "palani@betamonks.com",
+      // to: "Ravi.Padmanaban@v-p-s.com",
+      to: "palani@betamonks.com",
       subject: `TimeSheet - Vigneshwaran - ${today}`,
       text: `
 Hi   sir,
