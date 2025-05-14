@@ -29,8 +29,8 @@ export default async (event, context) => {
 
     const mailOptions = {
       from: "vigneswaran@betamonks.com",
-      // to: "Ravi.Padmanaban@v-p-s.com",
-      to: "palani@betamonks.com",
+      to: "jayanthi@betamonks.com",
+      cc: "palani@betamonks.com",
       subject: `TimeSheet - Vigneshwaran - ${today}`,
       text: `
 Hi   sir,
