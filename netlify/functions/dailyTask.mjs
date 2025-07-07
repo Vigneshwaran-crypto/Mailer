@@ -9,6 +9,8 @@ export default async (event, context) => {
 
     const leaveDays = ["30/05/2025", "01/05/2025", "20/10/2025"];
 
+    const mailSubject = process.env.Mail_Subject;
+
     if (bossOnLeave || leaveDays.includes(today)) {
       console.log(`Mail Skipped today : ${today} - Office Leave`);
       return new Response(
@@ -48,6 +50,7 @@ https://docs.google.com/spreadsheets/d/1U-MnTJjA8vzB4haTjmKfKZS4c6IT5m8nWwChqizi
 
     const info = await transporter.sendMail(mailOptions);
     console.log("Mail Delivered Details:", info);
+    console.log("mailSubject from env:", mailSubject);
     return new Response(
       JSON.stringify({ message: "Mail Sent Successfully", info }),
       { statusCode: 200 }
