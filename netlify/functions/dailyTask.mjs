@@ -10,6 +10,12 @@ export default async (event, context) => {
     const leaveDays = ["30/05/2025", "01/05/2025", "20/10/2025"];
 
     const mailSubject = process.env.Mail_Subject;
+    const mailBody = process.env.Mail_Body;
+    const isBossLeave = process.env.BOSS_ON_LEAVE;
+
+    console.log("env Val isBossLeave", isBossLeave);
+    console.log("env Val mailSubject", mailSubject);
+    console.log("env Val mailBody", mailBody);
 
     if (bossOnLeave || leaveDays.includes(today)) {
       console.log(`Mail Skipped today : ${today} - Office Leave`);
@@ -29,7 +35,7 @@ export default async (event, context) => {
       },
     });
 
-    const mailOptions = {
+    const mailForTeam = {
       from: "vigneswaran@betamonks.com",
       to: "jayanthi@betamonks.com",
       cc: "palani@betamonks.com",
@@ -48,11 +54,25 @@ Please follow the link :
 https://docs.google.com/spreadsheets/d/1U-MnTJjA8vzB4haTjmKfKZS4c6IT5m8nWwChqiziF4o/edit?usp=sharing`,
     };
 
-    const info = await transporter.sendMail(mailOptions);
-    console.log("Mail Delivered Details:", info);
-    console.log("mailSubject from env:", mailSubject);
+    const mailForCeo = {
+      from: "vigneswaran@betamonks.com",
+      to: "vigneshdev8055@gmail.com",
+      subject: mailSubject,
+      text: mailBody,
+    };
+
+    const mailForTeamInfo = await transporter.sendMail(mailForTeam);
+    const mailForCeoInfo = await transporter.sendMail(mailForCeo);
+
+    console.log("Team Mail Delivered Details:", mailForTeamInfo);
+    console.log("CEO Mail Delivered Details:", mailForCeoInfo);
+
     return new Response(
-      JSON.stringify({ message: "Mail Sent Successfully", info }),
+      JSON.stringify({
+        message: "Mail Sent Successfully",
+        mailForTeamInfo,
+        mailForCeoInfo,
+      }),
       { statusCode: 200 }
     );
   } catch (e) {
