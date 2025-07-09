@@ -10,7 +10,7 @@ export default async (event, context) => {
     const leaveDays = ["30/05/2025", "01/05/2025", "20/10/2025"];
 
     const mailSubject = process.env.Mail_Subject;
-    const mailBody = process.env.Mail_Body;
+    const mailBody = process.env.Mail_Body?.replace(/\\n/g, "\n");
     const isBossLeave = process.env.BOSS_ON_LEAVE;
 
     console.log("env Val isBossLeave", isBossLeave);
