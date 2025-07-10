@@ -15,9 +15,9 @@ export default async (event, context) => {
 
     console.log("env Val isBossLeave", isBossLeave);
     console.log("env Val mailSubject", mailSubject);
-    console.log("env Val mailBody", mailBody);
+    console.log("env Val mailBody\n", mailBody);
 
-    if (bossOnLeave || leaveDays.includes(today)) {
+    if (isBossLeave || leaveDays.includes(today)) {
       console.log(`Mail Skipped today : ${today} - Office Leave`);
       return new Response(
         JSON.stringify({ message: `${today} is your leave , Mail Skipped` }),
@@ -56,7 +56,8 @@ https://docs.google.com/spreadsheets/d/1U-MnTJjA8vzB4haTjmKfKZS4c6IT5m8nWwChqizi
 
     const mailForCeo = {
       from: "vigneswaran@betamonks.com",
-      to: "vigneshdev8055@gmail.com",
+      to: "gokul@betamonks.com",
+      cc: "vigneshdev8055@gmail.com",
       subject: mailSubject,
       text: mailBody,
     };
