@@ -2,22 +2,19 @@ import nodemailer from "nodemailer";
 import moment from "moment";
 
 export default async (event, context) => {
-  console.log("Mail Process Initialized....");
+  console.log("Mail Process Initialized....\n");
+  const today = moment().format("DD/MM/YYYY");
+  console.log("Date :\n", today);
   try {
-    const today = moment().format("DD/MM/YYYY");
-    const bossOnLeave = false;
-
-    const leaveDays = ["30/05/2025", "01/05/2025", "20/10/2025"];
-
     const mailSubject = process.env.Mail_Subject;
     const mailBody = process.env.Mail_Body?.replace(/\\n/g, "\n");
     const isBossLeave = process.env.BOSS_ON_LEAVE;
 
-    console.log("env Val isBossLeave", isBossLeave);
-    console.log("env Val mailSubject", mailSubject);
-    console.log("env Val mailBody\n", mailBody);
+    console.log("isBossLeave :\n", isBossLeave);
+    console.log("Mail Subject :\n", mailSubject);
+    console.log("Mail Body :\n", mailBody);
 
-    if (isBossLeave || leaveDays.includes(today)) {
+    if (isBossLeave) {
       console.log(`Mail Skipped today : ${today} - Office Leave`);
       return new Response(
         JSON.stringify({ message: `${today} is your leave , Mail Skipped` }),
@@ -58,15 +55,15 @@ https://docs.google.com/spreadsheets/d/1U-MnTJjA8vzB4haTjmKfKZS4c6IT5m8nWwChqizi
       from: "vigneswaran@betamonks.com",
       to: "gokul@betamonks.com",
       cc: "vigneshdev8055@gmail.com",
-      subject: mailSubject,
+      subject: `TimeSheet - Vigneshwaran - ${today}`,
       text: mailBody,
     };
 
     const mailForTeamInfo = await transporter.sendMail(mailForTeam);
     const mailForCeoInfo = await transporter.sendMail(mailForCeo);
 
-    console.log("Team Mail Delivered Details:", mailForTeamInfo);
-    console.log("CEO Mail Delivered Details:", mailForCeoInfo);
+    console.log("Team Mail Delivered Details :\n", mailForTeamInfo);
+    console.log("CEO Mail Delivered Details :\n", mailForCeoInfo);
 
     return new Response(
       JSON.stringify({
