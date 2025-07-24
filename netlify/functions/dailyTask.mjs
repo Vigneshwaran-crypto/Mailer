@@ -14,7 +14,7 @@ export default async (event, context) => {
     console.log("Mail Subject :\n", mailSubject);
     console.log("Mail Body :\n", mailBody);
 
-    if (isBossLeave) {
+    if (isBossLeave === "1") {
       console.log(`Mail Skipped today : ${today} - Office Leave`);
       return new Response(
         JSON.stringify({ message: `${today} is your leave , Mail Skipped` }),
@@ -51,25 +51,13 @@ Please follow the link :
 https://docs.google.com/spreadsheets/d/1U-MnTJjA8vzB4haTjmKfKZS4c6IT5m8nWwChqiziF4o/edit?usp=sharing`,
     };
 
-    // const mailForCeo = {
-    //   from: "vigneswaran@betamonks.com",
-    //   to: "gokul@betamonks.com",
-    //   cc: "vigneshdev8055@gmail.com",
-    //   subject: `TimeSheet - Vigneshwaran - ${today}`,
-    //   text: mailBody,
-    // };
-
     const mailForTeamInfo = await transporter.sendMail(mailForTeam);
-    // const mailForCeoInfo = await transporter.sendMail(mailForCeo);
-
     console.log("Team Mail Delivered Details :\n", mailForTeamInfo);
-    // console.log("CEO Mail Delivered Details :\n", mailForCeoInfo);
 
     return new Response(
       JSON.stringify({
         message: "Mail Sent Successfully",
         mailForTeamInfo,
-        // mailForCeoInfo,
       }),
       { statusCode: 200 }
     );
