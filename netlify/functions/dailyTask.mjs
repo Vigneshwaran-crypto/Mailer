@@ -6,13 +6,9 @@ export default async (event, context) => {
   const today = moment().format("DD/MM/YYYY");
   console.log("Date :\n", today);
   try {
-    const mailSubject = process.env.Mail_Subject;
-    const mailBody = process.env.Mail_Body?.replace(/\\n/g, "\n");
     const isBossLeave = process.env.BOSS_ON_LEAVE;
 
     console.log("isBossLeave :\n", isBossLeave);
-    console.log("Mail Subject :\n", mailSubject);
-    console.log("Mail Body :\n", mailBody);
 
     if (isBossLeave === "1") {
       console.log(`Mail Skipped today : ${today} - Office Leave`);
