@@ -14,7 +14,7 @@ export default async (event, context) => {
       console.log(`Mail Skipped today : ${today} - Office Leave`);
       return new Response(
         JSON.stringify({ message: `${today} is your leave , Mail Skipped` }),
-        { statusCode: 200 }
+        { statusCode: 200 },
       );
     }
 
@@ -30,8 +30,8 @@ export default async (event, context) => {
 
     const mailForTeam = {
       from: "vigneswaran@betamonks.com",
-      to: "jayanthi@betamonks.com",
-      cc: "palani@betamonks.com",
+      to: "palani@betamonks.com",
+      cc: "sangeetha@betamonks.com",
       subject: `TimeSheet - Vigneshwaran - ${today}`,
       text: `
 Hi   sir,
@@ -55,13 +55,13 @@ https://docs.google.com/spreadsheets/d/1U-MnTJjA8vzB4haTjmKfKZS4c6IT5m8nWwChqizi
         message: "Mail Sent Successfully",
         mailForTeamInfo,
       }),
-      { statusCode: 200 }
+      { statusCode: 200 },
     );
   } catch (e) {
     console.log("Error Ocurred :", e.message);
     return new Response(
       JSON.stringify({ error: "Mail Failed", message: e.message }),
-      { statusCode: 500 }
+      { statusCode: 500 },
     );
   }
 };
