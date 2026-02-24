@@ -31,7 +31,7 @@ export default async (event, context) => {
     const mailForTeam = {
       from: "vigneswaran@betamonks.com",
       to: "palani@betamonks.com",
-      cc: "sangeetha@betamonks.com",
+      cc: "surendar@betamonks.com",
       subject: `TimeSheet - Vigneshwaran - ${today}`,
       text: `
 Hi   sir,
