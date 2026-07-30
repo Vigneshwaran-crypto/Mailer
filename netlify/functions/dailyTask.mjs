@@ -4,63 +4,58 @@ import moment from "moment";
 export default async (event, context) => {
   console.log("Mail Process Initialized....\n");
   const today = moment().format("DD/MM/YYYY");
-  console.log("Date :\n", today);
+  console.log("Today Date :\n", today);
   try {
-    const isBossLeave = process.env.BOSS_ON_LEAVE;
 
-    console.log("isBossLeave :\n", isBossLeave);
 
-    if (isBossLeave === "1") {
-      console.log(`Mail Skipped today : ${today} - Office Leave`);
-      return new Response(
-        JSON.stringify({ message: `${today} is your leave , Mail Skipped` }),
-        { statusCode: 200 },
-      );
-    }
+  const transporter = nodemailer.createTransport({
+  host: "smtp.zoho.in",
+  port: 587,
+  secure: false,
+  auth: {
+    user: "vigneswaran.saravanan@alpharithm.com",
+    pass: "Vigneswaran@2026", //VigneshDev8055
+  },
+});
 
-    const transporter = nodemailer.createTransport({
-      host: "betamonks.com",
-      port: 465,
-      secure: true,
-      auth: {
-        user: "vigneswaran@betamonks.com",
-        pass: "Pass123!@#",
-      },
-    });
-
-    const mailForTeam = {
-      from: "vigneswaran@betamonks.com",
-      to: "palani@betamonks.com",
-      cc: "surendar@betamonks.com",
-      subject: `TimeSheet - Vigneshwaran - ${today}`,
+    const taskMailConfig = {
+      from: "vigneswaran.saravanan@alpharithm.com",
+      to: "vigneshdev8055@gmail.com",
+      cc: "kalaivani17546@gmail.com",
+      subject: `Daily Project Progress Report - Vigneshwaran - ${today}`,
       text: `
-Hi   sir,
+Hi sir,
 
-Kindly find my work status today,
+Good Evening,
 
-Thanks and regards,
+Please find my daily project progress report at the link below:
 
-Vigneshwaran. S
+https://docs.google.com/spreadsheets/d/1BqRS88ys1TeGblcRoAvN1qtbEO6F4c4ZGHrbUHbeItw/edit?usp=sharing
 
-Please follow the link :
+The report is updated with the day's development activities, task status, and effort logged.
 
-https://docs.google.com/spreadsheets/d/1U-MnTJjA8vzB4haTjmKfKZS4c6IT5m8nWwChqiziF4o/edit?usp=sharing`,
+Please let me know if any additional information is required.
+
+Regards,
+Vigneshwaran S`,
     };
 
-    const mailForTeamInfo = await transporter.sendMail(mailForTeam);
-    console.log("Team Mail Delivered Details :\n", mailForTeamInfo);
+    const taskMailResponse = await transporter.sendMail(taskMailConfig);
+
+    console.log("Delivered Mail Details : \n ", taskMailResponse);
 
     return new Response(
       JSON.stringify({
         message: "Mail Sent Successfully",
-        mailForTeamInfo,
+        taskMailResponse,
       }),
       { statusCode: 200 },
     );
+
   } catch (e) {
     console.log("Error Ocurred :", e.message);
     return new Response(
-      JSON.stringify({ error: "Mail Failed", message: e.message }),
+      JSON.stringify({ error: "Mail Failed To Send", message: e.message }),
       { statusCode: 500 },
     );
   }
