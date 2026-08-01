@@ -1,27 +1,35 @@
 import nodemailer from "nodemailer";
 import moment from "moment";
+import { holidays } from "./holidays.mjs";
 
 export default async (event, context) => {
-  console.log("Mail Process Initialized....\n");
   const today = moment().format("DD/MM/YYYY");
+  const thisDay = new Date().toISOString().split("T")[0];
+
+  if(holidays.includes(thisDay))
+  return new Response(
+    JSON.stringify({
+      message: `Mail Skipped : ${today} - is Holiday `,
+    }),
+  );
+
+  console.log("Mail Process Initialized....\n");
   console.log("Today Date :\n", today);
   try {
-
-
-  const transporter = nodemailer.createTransport({
-  host: "smtp.zoho.in",
-  port: 587,
-  secure: false,
-  auth: {
-    user: "vigneswaran.saravanan@alpharithm.com",
-    pass: "VigneshDev8055", //VigneshDev8055,Vigneswaran@2026
-  },
-});
+    const transporter = nodemailer.createTransport({
+      host: "smtppro.zoho.com",
+      port: 465,
+      secure: true,
+      auth: {
+        user: "vigneswaran.saravanan@alpharithm.com",
+        pass: "Vigneswaran@2026",
+      },
+    });
 
     const taskMailConfig = {
       from: "vigneswaran.saravanan@alpharithm.com",
-      to: "vigneshdev8055@gmail.com",
-      cc: "kalaivani17546@gmail.com",
+      to: "prem@alpharithm.com",
+      // cc: "kalaivani17546@gmail.com",
       subject: `Daily Project Progress Report - Vigneshwaran - ${today}`,
       text: `
 Hi sir,
@@ -51,7 +59,6 @@ Vigneshwaran S`,
       }),
       { statusCode: 200 },
     );
-
   } catch (e) {
     console.log("Error Ocurred :", e.message);
     return new Response(
