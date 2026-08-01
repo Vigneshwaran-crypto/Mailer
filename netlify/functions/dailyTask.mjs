@@ -14,7 +14,7 @@ export default async (event, context) => {
   secure: false,
   auth: {
     user: "vigneswaran.saravanan@alpharithm.com",
-    pass: "Vigneswaran@2026", //VigneshDev8055
+    pass: "VigneshDev8055", //VigneshDev8055,Vigneswaran@2026
   },
 });
 
