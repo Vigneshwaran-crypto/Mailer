@@ -29,6 +29,7 @@ export default async (event, context) => {
     const taskMailConfig = {
       from: "vigneswaran.saravanan@alpharithm.com",
       to: "prem@alpharithm.com",
+      cc: "geetha.k@ant.works",
       // cc: "kalaivani17546@gmail.com",
       subject: `Daily Project Progress Report - Vigneshwaran - ${today}`,
       text: `
